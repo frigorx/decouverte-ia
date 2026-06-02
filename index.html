@@ -500,4 +500,9 @@
   function applyZoom(){const m=document.getElementById('contenu');if(m)m.style.zoom=ZOOMS[fsIdx];}
   function fontStep(d){fsIdx=Math.min(ZOOMS.length-1,Math.max(0,fsIdx+d));applyZoom();saveA11y();}
   function toggleA(name,btn){const on=document.body.classList.toggle(name);if(btn)btn.setAttribute('aria-pressed',on?'true':'false');saveA11y();}
-  function syncButtons(){TOGGLES.forEach
+  function syncButtons(){TOGGLES.forEach(n=>{const b=document.getElementById('a-'+n);if(b)b.setAttribute('aria-pressed',document.body.classList.contains(n)?'true':'false');});}
+  function resetA11y(){fsIdx=1;applyZoom();TOGGLES.forEach(n=>document.body.classList.remove(n));syncButtons();saveA11y();}
+  (function loadA11y(){try{const s=JSON.parse(localStorage.getItem(A11Y_KEY));if(s){if(typeof s.fsIdx==='number')fsIdx=Math.min(ZOOMS.length-1,Math.max(0,s.fsIdx));TOGGLES.forEach(n=>{if(s[n])document.body.classList.add(n);});}}catch(e){}applyZoom();syncButtons();})();
+</script>
+</body>
+</html>
