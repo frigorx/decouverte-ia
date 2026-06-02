@@ -100,6 +100,8 @@
   .modcard .d{font-size:15px;color:var(--gris);}
   .modcard .duree{display:inline-block;margin-top:8px;font-size:13px;color:var(--bleu);background:#eef3f9;border:1px solid var(--ligne);border-radius:20px;padding:2px 10px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;}
   .modcard.vu::after{content:"✓ vu";position:absolute;top:10px;right:12px;background:var(--ok);color:#fff;font-size:12px;font-weight:bold;padding:2px 8px;border-radius:12px;}
+  .modcard.bonus{border-top-color:var(--ok);}
+  .modcard.bonus .n{color:var(--ok);}
   .modnav{display:flex;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap;}
   .modnav button{cursor:pointer;border:none;border-radius:9px;padding:13px 18px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:15px;min-height:48px;}
   .modnav .retour{background:#e3e9f0;color:var(--bleu);}
@@ -256,6 +258,9 @@
     <div class="modcard" id="card-sec2" tabindex="0" role="button" onclick="show('sec2')" onkeydown="navKey(event,'sec2')"><div class="n">Module 2</div><div class="t">L'IA bosse pour toi</div><div class="d">Rapport, PowerPoint, oral.</div><span class="duree">≈ 1h30</span></div>
     <div class="modcard" id="card-sec3" tabindex="0" role="button" onclick="show('sec3')" onkeydown="navKey(event,'sec3')"><div class="n">Module 3</div><div class="t">Le piège</div><div class="d">Quand l'IA se plante.</div><span class="duree">≈ 1h30</span></div>
     <div class="modcard" id="card-sec4" tabindex="0" role="button" onclick="show('sec4')" onkeydown="navKey(event,'sec4')"><div class="n">Module 4</div><div class="t">Ta boîte à outils</div><div class="d">Tes prompts pour le concours.</div><span class="duree">≈ 1h30</span></div>
+    <div style="grid-column:1/-1;margin-top:8px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;color:var(--orange)">🚀 Pour aller plus loin (bonus, si tu vas vite)</div>
+    <div class="modcard bonus" id="card-sec-mod5" tabindex="0" role="button" onclick="show('mod5')" onkeydown="navKey(event,'mod5')"><div class="n">Module 5 · bonus</div><div class="t">Parler à l'IA comme un pro</div><div class="d">L'art de la consigne + fabriquer un outil.</div><span class="duree">≈ 1h30</span></div>
+    <div class="modcard bonus" id="card-sec-mod6" tabindex="0" role="button" onclick="show('mod6')" onkeydown="navKey(event,'mod6')"><div class="n">Module 6 · bonus</div><div class="t">L'IA qui voit… et qui se trompe</div><div class="d">Analyser une photo, repérer le faux.</div><span class="duree">≈ 1h30</span></div>
   </div>
 </section>
 <!-- ============ INDEX MODULES ÉNERGÉTIQUE ============ -->
@@ -268,6 +273,9 @@
     <div class="modcard" id="card-ene2" tabindex="0" role="button" onclick="show('ene2')" onkeydown="navKey(event,'ene2')"><div class="n">Module 2</div><div class="t">L'IA bosse pour toi</div><div class="d">Rapport, PowerPoint, oral.</div><span class="duree">≈ 1h30</span></div>
     <div class="modcard" id="card-ene3" tabindex="0" role="button" onclick="show('ene3')" onkeydown="navKey(event,'ene3')"><div class="n">Module 3</div><div class="t">Le piège</div><div class="d">Quand l'IA se plante.</div><span class="duree">≈ 1h30</span></div>
     <div class="modcard" id="card-ene4" tabindex="0" role="button" onclick="show('ene4')" onkeydown="navKey(event,'ene4')"><div class="n">Module 4</div><div class="t">Ta boîte à outils</div><div class="d">Tes prompts pour le BTS.</div><span class="duree">≈ 1h30</span></div>
+    <div style="grid-column:1/-1;margin-top:8px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;color:var(--orange)">🚀 Pour aller plus loin (bonus, si tu vas vite)</div>
+    <div class="modcard bonus" id="card-ene-mod5" tabindex="0" role="button" onclick="show('mod5')" onkeydown="navKey(event,'mod5')"><div class="n">Module 5 · bonus</div><div class="t">Parler à l'IA comme un pro</div><div class="d">L'art de la consigne + fabriquer un outil.</div><span class="duree">≈ 1h30</span></div>
+    <div class="modcard bonus" id="card-ene-mod6" tabindex="0" role="button" onclick="show('mod6')" onkeydown="navKey(event,'mod6')"><div class="n">Module 6 · bonus</div><div class="t">L'IA qui voit… et qui se trompe</div><div class="d">Analyser une photo, repérer le faux.</div><span class="duree">≈ 1h30</span></div>
   </div>
 </section>
 <!-- ===================== MODULES SÉCURITÉ ===================== -->
@@ -362,7 +370,7 @@
     <button class="btn-print" onclick="window.print()">🖨 Imprimer ma fiche</button>
     <p class="no-print" style="margin-top:14px;color:var(--bleu);font-weight:bold;">🎓 L'IA est ton assistant, pas ton cerveau. Maintenant tu sais t'en servir.</p>
   </div>
-  <div class="modnav"><button class="retour" onclick="show('modules-sec')">← Modules</button><button class="suite" onclick="show('accueil')">🏁 Terminé</button></div>
+  <div class="modnav"><button class="retour" onclick="show('modules-sec')">← Modules</button><button class="suite" onclick="show('mod5')">🚀 Bonus : Module 5 →</button></div>
 </section>
 <!-- ===================== MODULES ÉNERGÉTIQUE ===================== -->
 <section class="view" id="ene1">
@@ -457,22 +465,103 @@
     <button class="btn-print" onclick="window.print()">🖨 Imprimer ma fiche</button>
     <p class="no-print" style="margin-top:14px;color:var(--bleu);font-weight:bold;">🎓 L'IA est ton assistant, pas ton cerveau. Maintenant tu sais t'en servir.</p>
   </div>
-  <div class="modnav"><button class="retour" onclick="show('modules-ene')">← Modules</button><button class="suite" onclick="show('accueil')">🏁 Terminé</button></div>
+  <div class="modnav"><button class="retour" onclick="show('modules-ene')">← Modules</button><button class="suite" onclick="show('mod5')">🚀 Bonus : Module 5 →</button></div>
+</section>
+<!-- ===================== MODULE 5 — BONUS (commun) ===================== -->
+<section class="view" id="mod5">
+  <span class="fbadge">🚀 Bonus · Module 5</span>
+  <h2 class="titre">Parler à l'IA comme un pro 🎯</h2>
+  <p class="tagline">Le secret des bonnes réponses : tout se joue dans la consigne (le « prompt »).</p>
+  <div class="carte"><h3><span class="pas">1</span> Les 4 ingrédients d'une bonne consigne</h3>
+    <p class="objo">Une bonne réponse vient d'une bonne demande. Donne ces 4 ingrédients à l'IA.</p>
+    <div class="grille">
+      <div class="mini"><b>🎩 Rôle</b><p>Qui l'IA doit être. « Tu es un examinateur de BTS. »</p></div>
+      <div class="mini"><b>📋 Contexte</b><p>Ta situation. « Je suis en Terminale Bac Pro, je révise. »</p></div>
+      <div class="mini"><b>🎯 Tâche</b><p>Ce que tu veux. « Pose-moi 5 questions puis corrige. »</p></div>
+      <div class="mini"><b>📦 Format</b><p>Comment tu veux la réponse. « Sous forme de tableau. »</p></div>
+    </div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> Avant / après : vois la différence</h3>
+    <div class="avert">❌ <b>Consigne vague :</b> on obtient une réponse banale, pas pour toi.</div>
+    <div class="prompt"><span class="txt">Parle-moi de la sécurité incendie.</span><button class="btn-copie" data-copie="Parle-moi de la sécurité incendie.">Copier 📋</button></div>
+    <div class="reponse">✅ <b>Consigne pro</b> (les 4 ingrédients) : une réponse taillée pour toi. Essaie celle de ta filière.</div>
+    <div class="prompt"><span class="txt"><b>🛡 Sécurité :</b> Tu es un formateur en sécurité incendie. Je suis en Terminale Bac Pro. Explique-moi le rôle d'un SSI en 5 points simples, sous forme de liste.</span><button class="btn-copie" data-copie="Tu es un formateur en sécurité incendie. Je suis en Terminale Bac Pro. Explique-moi le rôle d'un SSI en 5 points simples, sous forme de liste.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt"><b>❄ Froid :</b> Tu es un formateur en froid. Je suis en Terminale Bac Pro. Explique-moi le cycle frigorifique en 5 points simples, sous forme de liste.</span><button class="btn-copie" data-copie="Tu es un formateur en froid. Je suis en Terminale Bac Pro. Explique-moi le cycle frigorifique en 5 points simples, sous forme de liste.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> Affiner et faire répéter</h3>
+    <p class="objo">La première réponse n'est jamais la dernière. Rebondis.</p>
+    <div class="prompt"><span class="txt">Plus court : résume en 5 points.</span><button class="btn-copie" data-copie="Plus court : résume en 5 points.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt">Explique comme à un débutant, avec un exemple concret.</span><button class="btn-copie" data-copie="Explique comme à un débutant, avec un exemple concret.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt"><b>Donne un rôle à l'IA :</b> Joue le jury d'un examen oral. Interroge-moi une question à la fois, attends ma réponse, puis corrige.</span><button class="btn-copie" data-copie="Joue le jury d'un examen oral. Interroge-moi une question à la fois, attends ma réponse, puis corrige.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">4</span> 🛠 Fais fabriquer ton outil</h3>
+    <p class="objo">Quand tu commandes bien, l'IA te construit un vrai outil. Colle le prompt dans Claude.</p>
+    <div class="prompt"><span class="txt"><b>❄ Froid :</b> Fais une page web qui calcule le COP d'une pompe à chaleur : je saisis la chaleur fournie et l'électricité absorbée, elle affiche le résultat.</span><button class="btn-copie" data-copie="Fais une page web qui calcule le COP d'une pompe à chaleur : je saisis la chaleur fournie et l'électricité absorbée, elle affiche le résultat.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt"><b>🛡 Sécurité :</b> Fais une page web qui génère un QCM de 10 questions sur les gestes de premiers secours, avec le score à la fin.</span><button class="btn-copie" data-copie="Fais une page web qui génère un QCM de 10 questions sur les gestes de premiers secours, avec le score à la fin.">Copier 📋</button></div>
+    <div class="cadre-info">💡 Souviens-toi du Module 1 : le code obtenu est un <b>fichier HTML</b>. Copie-le, enregistre-le en <b>.html</b>, double-clic → ton outil s'ouvre !</div>
+    <div class="fait-ligne" onclick="toggleFait(this)"><span class="coche">✓</span><span class="lab">Module 5 terminé</span></div>
+  </div>
+  <div class="modnav"><button class="retour" onclick="retourModules()">← Modules</button><button class="suite" onclick="show('mod6')">Module suivant →</button></div>
+</section>
+<!-- ===================== MODULE 6 — BONUS (commun) ===================== -->
+<section class="view" id="mod6">
+  <span class="fbadge">🚀 Bonus · Module 6</span>
+  <h2 class="titre">L'IA qui voit… et qui se trompe 👁️</h2>
+  <p class="tagline">Montre-lui une image, fais-toi aider — mais garde toujours l'œil critique.</p>
+  <div class="carte"><h3><span class="pas">1</span> 👁️ L'IA qui voit</h3>
+    <p class="objo">Tu peux envoyer une photo ou un document, et lui demander de l'expliquer.</p>
+    <div class="prompt"><span class="txt"><b>❄ Froid :</b> Voici la photo de la plaque signalétique d'un compresseur. Explique-moi chaque information (tension, puissance, fluide…).</span><button class="btn-copie" data-copie="Voici la photo de la plaque signalétique d'un compresseur. Explique-moi chaque information (tension, puissance, fluide).">Copier 📋</button></div>
+    <div class="prompt"><span class="txt"><b>🛡 Sécurité :</b> Voici la photo d'un plan d'évacuation. Résume-moi les consignes principales en cas d'incendie.</span><button class="btn-copie" data-copie="Voici la photo d'un plan d'évacuation. Résume-moi les consignes principales en cas d'incendie.">Copier 📋</button></div>
+    <div class="avert">⚠ <b>Prudence :</b> jamais de visage, de document confidentiel d'entreprise, ni de données personnelles sur la photo.</div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> 🕵️ Repérer le faux</h3>
+    <p class="objo">L'IA crée des images et des textes très réalistes… et parfois totalement faux.</p>
+    <div class="prompt"><span class="txt">Crée une image très réaliste d'un document officiel (juste pour l'exercice).</span><button class="btn-copie" data-copie="Crée une image très réaliste d'un document officiel.">Copier 📋</button></div>
+    <ul>
+      <li><b>Indices d'une image générée :</b> mains bizarres, textes déformés, détails qui ne collent pas.</li>
+      <li><b>Vérifie les sources :</b> demande « cite tes sources », puis contrôle-les.</li>
+      <li><b>Croise deux IA :</b> pose la même question à deux outils et compare.</li>
+      <li>🎭 Méfie-toi des <b>fausses vidéos truquées (« deepfakes »)</b>.</li>
+    </ul>
+    <div class="cadre-info">🛡 <b>Pour un futur agent :</b> repérer un faux document ou une fausse pièce d'identité, c'est le cœur du métier. L'IA rend les faux plus crédibles — d'où l'importance de vérifier.</div>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> 🔒 L'IA chez soi : mes données</h3>
+    <p class="objo">Où vont mes informations quand j'écris à une IA ?</p>
+    <ul>
+      <li>La plupart des IA (ChatGPT, Gemini, Claude) envoient tes données sur des <b>serveurs aux États-Unis</b>.</li>
+      <li>🇫🇷 <b>Le Chat (Mistral)</b> est hébergé en <b>Europe</b> et soumis au <b>RGPD</b>.</li>
+      <li>💻 Il existe même des IA qu'on fait tourner <b>sur son propre ordinateur</b>, sans Internet : tes données restent 100 % chez toi.</li>
+    </ul>
+    <div class="avert"><b>⚠ Règle d'or (rappel) :</b> jamais de données personnelles ou confidentielles, quelle que soit l'IA.</div>
+  </div>
+  <div class="carte"><h3><span class="pas">4</span> 🧭 L'IA et mon métier de demain</h3>
+    <p class="objo">Demain, l'IA sera un outil de plus dans ton métier. Autant savoir s'en servir.</p>
+    <div class="grille">
+      <div class="mini"><b>❄ Froid &amp; énergétique</b><p>Maintenance prédictive (prévenir la panne avant qu'elle arrive), régulation intelligente (GTB), aide au diagnostic.</p></div>
+      <div class="mini"><b>🛡 Sécurité</b><p>Vidéosurveillance intelligente (détection automatique), analyse de flux, aide à la rédaction de rapports.</p></div>
+    </div>
+    <div class="philo"><p style="margin:0"><b>À retenir :</b> ce n'est pas « l'IA contre toi », c'est « <b>toi + l'IA</b> ». Celui qui sait s'en servir aura une longueur d'avance.</p></div>
+    <div class="fait-ligne" onclick="toggleFait(this)"><span class="coche">✓</span><span class="lab">Module 6 terminé</span></div>
+  </div>
+  <div class="modnav"><button class="retour" onclick="retourModules()">← Modules</button><button class="suite" onclick="show('accueil')">🏁 Terminé</button></div>
 </section>
 </main>
 <footer>Ressource pédagogique <span class="etab">inerWeb Édu</span> · F. Henninot — LP Privé Jacques Raynaud · Parcours Avenir · Réutilisable (GitHub Pages)</footer>
 <div class="toast" id="toast" role="status" aria-live="polite">Copié ✓</div>
 <script>
   // ---- Router ----
-  const titres={accueil:"Programme de découverte de l'IA",sondage:"Le sondage",filieres:"Choix de la filière","modules-sec":"🛡 Sécurité — modules","modules-ene":"❄ Énergétique — modules",sec1:"🛡 Module 1",sec2:"🛡 Module 2",sec3:"🛡 Module 3",sec4:"🛡 Module 4",ene1:"❄ Module 1",ene2:"❄ Module 2",ene3:"❄ Module 3",ene4:"❄ Module 4"};
+  const titres={accueil:"Programme de découverte de l'IA",sondage:"Le sondage",filieres:"Choix de la filière","modules-sec":"🛡 Sécurité — modules","modules-ene":"❄ Énergétique — modules",sec1:"🛡 Module 1",sec2:"🛡 Module 2",sec3:"🛡 Module 3",sec4:"🛡 Module 4",ene1:"❄ Module 1",ene2:"❄ Module 2",ene3:"❄ Module 3",ene4:"❄ Module 4",mod5:"🚀 Module 5 — La consigne",mod6:"🚀 Module 6 — Voir & vérifier"};
+  let derniereFiliere='sec';
   function show(id){
     document.querySelectorAll('.view').forEach(v=>v.style.display='none');
     const el=document.getElementById(id); if(el){el.style.display='block';}
     document.getElementById('bread').textContent=titres[id]||'';
     if(/^(sec|ene)[1-4]$/.test(id)){const c=document.getElementById('card-'+id);if(c)c.classList.add('vu');}
+    if(/^mod[56]$/.test(id)){const c=document.getElementById('card-'+derniereFiliere+'-'+id);if(c)c.classList.add('vu');}
     window.scrollTo({top:0,behavior:'smooth'});
   }
-  function choisir(f){show(f==='sec'?'modules-sec':'modules-ene');}
+  function choisir(f){derniereFiliere=f;show(f==='sec'?'modules-sec':'modules-ene');}
+  function retourModules(){show('modules-'+derniereFiliere);}
   function navKey(e,id){if(e.key==='Enter'||e.key===' '){e.preventDefault();show(id);}}
   // ---- Sondage ----
   const poll={chatgpt:0,gemini:0,claude:0,mistral:0,autre:0,abo:0,images:0};

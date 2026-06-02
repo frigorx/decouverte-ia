@@ -2,7 +2,12 @@
 
 Ressource pédagogique pour l'initiation à l'usage des IA (Parcours Avenir),
 classes de Terminale Bac Pro **Métiers de la Sécurité** et **MFER**.
-4 modules d'autonomie (≈ 1h30 chacun). Une seule page, aucune dépendance externe.
+4 modules d'autonomie + 2 modules bonus de perfectionnement (≈ 1h30 chacun),
+pour les élèves qui avancent vite. Une seule page, aucune dépendance externe.
+
+Modules bonus (communs aux deux filières) :
+- **Module 5 — Parler à l'IA comme un pro** : l'art de la consigne (le « prompt »), avant/après, et fabriquer un vrai outil web.
+- **Module 6 — L'IA qui voit… et qui se trompe** : analyser une photo/document, repérer le faux (deepfakes), confidentialité des données, et l'IA dans le métier de demain.
 
 Ressource inerWeb Édu · F. Henninot.
 
