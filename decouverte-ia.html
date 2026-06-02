@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Initiation à l'usage des IA pour élèves de Terminale Bac Pro (Métiers de la Sécurité, MFER) — ressource pédagogique inerWeb Édu, parcours Avenir, accessible TDAH/DYS.">
+<title>Programme de découverte de l'IA · inerWeb Édu</title>
+<style>
+  :root{--bleu:#1b3a63;--bleu-clair:#2d5a8e;--orange:#ff6b35;--fond:#f4f7fb;--carte:#fff;--texte:#1d2733;--gris:#5b6b7d;--ok:#1f9d55;--ligne:#dfe6ef;}
+  *{box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--fond);color:var(--texte);font-family:'Calibri','Segoe UI',sans-serif;font-size:var(--fs,18px);line-height:1.6;}
+  h1,h2,h3,.logo{font-family:'Trebuchet MS','Calibri',sans-serif;font-weight:bold;}
+  /* ---- Accessibilité : focus clavier ---- */
+  :focus-visible{outline:3px solid var(--orange);outline-offset:2px;border-radius:4px;}
+  .skip{position:absolute;left:-999px;top:0;z-index:100;background:#fff;color:var(--bleu);padding:10px 16px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;border-radius:0 0 10px 0;}
+  .skip:focus{left:0;}
+  header{background:linear-gradient(135deg,var(--bleu),var(--bleu-clair));color:#fff;padding:14px 22px;position:sticky;top:0;z-index:50;box-shadow:0 4px 14px rgba(27,58,99,.25);}
+  .topline{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .logo-img{height:46px;width:auto;background:#fff;border-radius:8px;padding:3px 6px;}
+  .ident{display:flex;flex-direction:column;line-height:1.1;}
+  .etab-main{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:24px;letter-spacing:.3px;}
+  .etab-sub{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:15px;color:#bfe0ff;}
+  .src-inerweb{margin-left:auto;font-size:12px;opacity:.7;text-align:right;line-height:1.3;}
+  .src-inerweb .badge-edu{background:var(--orange);color:#fff;font-family:'Trebuchet MS',sans-serif;font-weight:bold;padding:1px 6px;border-radius:5px;font-size:11px;}
+  .nav{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap;}
+  .btn-accueil{cursor:pointer;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;border-radius:8px;padding:8px 14px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:14px;min-height:40px;}
+  .btn-accueil:hover{background:var(--orange);border-color:var(--orange);}
+  .bread{font-size:14px;opacity:.9;}
+  /* ---- Barre d'accessibilité ---- */
+  .a11y{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.32);border-radius:10px;padding:8px 10px;}
+  .a11y .lab-a11y{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:14px;color:#fff;margin-right:2px;}
+  .a11y button{cursor:pointer;border:1px solid rgba(255,255,255,.55);background:#fff;color:var(--bleu);border-radius:8px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:15px;padding:7px 12px;min-height:40px;min-width:40px;transition:.12s;}
+  .a11y button:hover{background:var(--orange);color:#fff;border-color:var(--orange);}
+  .a11y button[aria-pressed="true"]{background:var(--ok);color:#fff;border-color:var(--ok);}
+  .a11y .reset-a11y{background:rgba(255,255,255,.18);color:#fff;}
+  .a11y .reset-a11y:hover{background:var(--orange);}
+  main{max-width:900px;margin:0 auto;padding:24px 18px 70px;}
+  .view{display:none;}
+  .carte{background:var(--carte);border:1px solid var(--ligne);border-radius:14px;padding:20px 22px;margin:0 0 18px;box-shadow:0 2px 10px rgba(27,58,99,.06);}
+  h2.titre{color:var(--bleu);font-size:26px;margin:0 0 6px;}
+  .tagline{color:var(--gris);font-size:18px;margin:0 0 18px;}
+  .carte h3{color:var(--bleu);font-size:20px;margin:0 0 6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .pas{background:var(--orange);color:#fff;width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex:none;}
+  .etiq{font-size:13px;color:#fff;background:var(--bleu-clair);padding:2px 9px;border-radius:20px;white-space:nowrap;}
+  .objo{color:var(--gris);font-style:italic;margin:0 0 12px;font-size:16px;}
+  ul{margin:8px 0 0;padding-left:22px;}li{margin:6px 0;}
+  .cle{color:var(--bleu);font-weight:bold;}.att{color:var(--orange);font-weight:bold;}
+  /* grille intro */
+  .grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:6px 0;}
+  .mini{background:#fff;border:1px solid var(--ligne);border-left:5px solid var(--orange);border-radius:10px;padding:14px 16px;}
+  .mini b{color:var(--bleu);font-family:'Trebuchet MS',sans-serif;font-size:17px;}
+  .mini p{margin:6px 0 0;font-size:16px;}
+  .philo{background:linear-gradient(135deg,#fff3ec,#ffe8dc);border:2px solid var(--orange);border-radius:12px;padding:18px 22px;margin:18px 0;}
+  .philo b{color:var(--orange);}
+  .cadre-info{background:#eef3f9;border:1px solid var(--ligne);border-left:5px solid var(--bleu-clair);border-radius:10px;padding:14px 18px;margin:14px 0;font-size:16px;}
+  .cadre-info b{color:var(--bleu);}
+  /* boutons */
+  .cta{cursor:pointer;border:none;border-radius:10px;background:var(--orange);color:#fff;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:18px;padding:14px 26px;transition:.15s;min-height:48px;}
+  .cta:hover{background:#e85d2a;transform:translateY(-2px);}
+  .cta.bleu{background:var(--bleu);}.cta.bleu:hover{background:var(--bleu-clair);}
+  .barre-boutons{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;}
+  /* liens officiels */
+  .avert{background:#fff5f0;border:1px solid #ffd6c2;border-radius:9px;padding:10px 14px;margin:0 0 14px;font-size:16px;}.avert b{color:var(--orange);}
+  .liens{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 14px;}
+  .lien{flex:1 1 180px;display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;background:#fff;border:2px solid var(--bleu);border-radius:10px;padding:12px 14px;color:var(--bleu);font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:16px;transition:.15s;min-height:48px;}
+  .lien:hover{background:var(--orange);border-color:var(--orange);color:#fff;transform:translateY(-2px);}
+  .lien small{font-family:'Calibri',sans-serif;font-weight:normal;font-size:13px;opacity:.85;}
+  /* prompts */
+  .prompt{background:#eef3f9;border:1px dashed var(--bleu-clair);border-left:5px solid var(--orange);border-radius:10px;padding:11px 14px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;}
+  .prompt .txt{flex:1;font-size:17px;}.prompt .txt b{color:var(--bleu);}
+  .btn-copie{flex:none;cursor:pointer;border:none;border-radius:8px;background:var(--bleu);color:#fff;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:14px;padding:10px 14px;min-width:96px;min-height:44px;transition:.15s;}
+  .btn-copie:hover{background:var(--bleu-clair);}.btn-copie:active{transform:scale(.96);}.btn-copie.fait{background:var(--ok);}
+  .reponse{background:#eaf6ee;border:1px solid #bfe3cb;border-radius:10px;padding:9px 14px;margin:6px 0 0;font-size:16px;}.reponse b{color:#1f7a44;}
+  .fait-ligne{display:flex;align-items:center;gap:10px;margin-top:12px;background:#f0f6f1;border:1px solid #cfe6d6;border-radius:9px;padding:9px 12px;cursor:pointer;user-select:none;min-height:44px;}
+  .fait-ligne .coche{width:24px;height:24px;border:2px solid var(--ok);border-radius:6px;flex:none;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:16px;background:#fff;}
+  .fait-ligne.coche-on .coche{background:var(--ok);}
+  .fait-ligne .lab{font-family:'Trebuchet MS',sans-serif;font-weight:bold;color:#2c6b40;}
+  /* sondage */
+  .pollrow{display:flex;align-items:center;gap:12px;margin:10px 0;}
+  .pollrow .nom{flex:0 0 200px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;color:var(--bleu);}
+  .pollrow .bar{flex:1;background:#eef3f9;border-radius:8px;height:30px;position:relative;overflow:hidden;border:1px solid var(--ligne);}
+  .pollrow .bar-fill{height:100%;background:linear-gradient(90deg,var(--orange),#ff8a5e);width:0;transition:width .35s;}
+  .pollrow .cnt{flex:0 0 40px;text-align:center;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:20px;color:var(--bleu);}
+  .pm{cursor:pointer;border:none;border-radius:7px;width:44px;height:44px;font-size:20px;font-weight:bold;font-family:'Trebuchet MS',sans-serif;}
+  .pm.plus{background:var(--ok);color:#fff;}.pm.moins{background:#e3e9f0;color:var(--bleu);}
+  .pm:active{transform:scale(.92);}
+  /* cartes filière / module */
+  .choix{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .gros{cursor:pointer;text-align:center;border:2px solid var(--bleu);border-radius:16px;padding:30px 20px;background:#fff;transition:.15s;}
+  .gros:hover{background:var(--bleu);color:#fff;transform:translateY(-3px);}
+  .gros .ico{font-size:46px;}
+  .gros .t{font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:22px;color:var(--bleu);margin:8px 0 4px;}
+  .gros:hover .t{color:#fff;}
+  .gros .d{font-size:15px;color:var(--gris);}.gros:hover .d{color:#dbe7f5;}
+  .modcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .modcard{cursor:pointer;border:1px solid var(--ligne);border-top:5px solid var(--orange);border-radius:12px;padding:16px;background:#fff;transition:.15s;position:relative;}
+  .modcard:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(27,58,99,.12);}
+  .modcard .n{font-family:'Trebuchet MS',sans-serif;font-weight:bold;color:var(--orange);font-size:14px;}
+  .modcard .t{font-family:'Trebuchet MS',sans-serif;font-weight:bold;color:var(--bleu);font-size:18px;margin:4px 0;}
+  .modcard .d{font-size:15px;color:var(--gris);}
+  .modcard .duree{display:inline-block;margin-top:8px;font-size:13px;color:var(--bleu);background:#eef3f9;border:1px solid var(--ligne);border-radius:20px;padding:2px 10px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;}
+  .modcard.vu::after{content:"✓ vu";position:absolute;top:10px;right:12px;background:var(--ok);color:#fff;font-size:12px;font-weight:bold;padding:2px 8px;border-radius:12px;}
+  .modnav{display:flex;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap;}
+  .modnav button{cursor:pointer;border:none;border-radius:9px;padding:13px 18px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:15px;min-height:48px;}
+  .modnav .retour{background:#e3e9f0;color:var(--bleu);}
+  .modnav .suite{background:var(--orange);color:#fff;}
+  .fbadge{display:inline-block;background:#eef3f9;border:1px solid var(--ligne);color:var(--bleu);font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:14px;padding:4px 12px;border-radius:20px;margin-bottom:10px;}
+  /* fiche perso */
+  .fiche{background:#fffaf6;border:2px solid var(--orange);}
+  .champ{margin:12px 0;}
+  .champ label{display:block;font-family:'Trebuchet MS',sans-serif;font-weight:bold;color:var(--bleu);margin-bottom:5px;}
+  .champ textarea{width:100%;min-height:58px;border:1px solid var(--ligne);border-radius:8px;padding:9px 12px;font-family:inherit;font-size:17px;resize:vertical;line-height:1.5;}
+  .champ textarea:focus{outline:2px solid var(--orange);border-color:var(--orange);}
+  .btn-print{cursor:pointer;border:none;border-radius:10px;background:var(--orange);color:#fff;font-family:'Trebuchet MS',sans-serif;font-weight:bold;font-size:17px;padding:13px 20px;margin-top:6px;min-height:48px;}
+  .howto h3{color:var(--bleu);font-size:20px;margin:0 0 4px;}
+  .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;margin:12px 0;}
+  .fstep{flex:1 1 200px;background:#fff;border:1px solid var(--ligne);border-radius:12px;padding:14px;text-align:center;}
+  .fstep.ia{border:2px solid var(--orange);}
+  .fstep.ok{background:#eaf6ee;border:1px solid #bfe3cb;}
+  .fstep .big{font-size:42px;line-height:1;}
+  .fstep .lab{margin-top:6px;font-size:16px;}
+  .fleche{display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--orange);font-weight:bold;}
+  .cand{display:flex;align-items:center;gap:8px;margin:6px 0;text-align:left;}
+  .cand .mot{flex:0 0 52px;font-weight:bold;color:var(--bleu);font-family:'Trebuchet MS',sans-serif;font-size:15px;}
+  .cbar{flex:1;background:#eef3f9;border-radius:6px;height:15px;overflow:hidden;}
+  .cbar i{display:block;height:100%;background:linear-gradient(90deg,var(--orange),#ff8a5e);}
+  footer{max-width:900px;margin:0 auto;padding:0 18px 40px;color:var(--gris);font-size:13px;text-align:center;}
+  footer .etab{font-weight:bold;color:var(--bleu);float:none;margin:0;opacity:1;text-align:center;}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--ok);color:#fff;padding:12px 22px;border-radius:30px;font-family:'Trebuchet MS',sans-serif;font-weight:bold;box-shadow:0 6px 18px rgba(0,0,0,.2);transition:.3s;z-index:99;}
+  .toast.show{transform:translateX(-50%) translateY(0);}
+  /* ============ MODES D'ACCESSIBILITÉ (fond toujours clair) ============ */
+  body.dys,body.dys .champ textarea{font-family:'Comic Sans MS','Trebuchet MS',Verdana,Tahoma,sans-serif;letter-spacing:.04em;word-spacing:.14em;}
+  body.dys h1,body.dys h2,body.dys h3,body.dys .logo,body.dys .modcard .t,body.dys .gros .t{font-family:'Comic Sans MS','Trebuchet MS',Verdana,sans-serif;}
+  body.interligne{line-height:1.95;}
+  body.interligne li{margin:10px 0;}
+  body.interligne p{margin-bottom:.55em;}
+  body.contraste{--texte:#000;--gris:#33414f;--ligne:#8795a6;}
+  body.contraste .objo{color:#33414f;}
+  body.contraste .tagline{color:#33414f;}
+  body.contraste .mini{border-left-width:6px;}
+  body.contraste .carte{border-color:#8795a6;}
+  body.contraste .lien,body.contraste .modcard,body.contraste .gros{border-width:2px;}
+  body.contraste .prompt .txt{color:#000;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;animation:none !important;}
+    .cta:hover,.gros:hover,.modcard:hover,.lien:hover{transform:none !important;}
+  }
+  @media (max-width:560px){.pollrow .nom{flex:0 0 130px;font-size:15px;}.etab{margin-left:0;text-align:left;width:100%;}}
+  @media print{header,.nav,.a11y,.modnav,.btn-copie,.btn-print,.toast,.cta,.no-print,.skip{display:none !important;}body{background:#fff;font-size:14px;}.view{display:block !important;}.carte{box-shadow:none;}main{zoom:1 !important;}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header>
+  <div class="topline">
+    <img class="logo-img" src="assets/logo-lpp.png" alt="Logo LPP Jacques Raynaud" onerror="this.style.display='none'">
+    <div class="ident">
+      <span class="etab-main">LPP Jacques Raynaud</span>
+      <span class="etab-sub">Campus ÉQUATIO · Parcours Avenir — Initiation à l'IA</span>
+    </div>
+    <img class="logo-img" src="assets/logo-equatio.png" alt="Logo Campus ÉQUATIO" onerror="this.style.display='none'">
+    <span class="src-inerweb">Ressource <b>inerWeb</b> <span class="badge-edu">Édu</span><br>F. Henninot</span>
+  </div>
+  <div class="nav"><button class="btn-accueil" onclick="show('accueil')">🏠 Accueil</button><span class="bread" id="bread">Programme de découverte de l'IA</span></div>
+  <div class="a11y" role="group" aria-label="Réglages d'affichage et d'accessibilité">
+    <span class="lab-a11y">🔧 Affichage&nbsp;:</span>
+    <button onclick="fontStep(-1)" aria-label="Réduire la taille du texte">A−</button>
+    <button onclick="fontStep(1)" aria-label="Agrandir la taille du texte">A+</button>
+    <button id="a-dys" aria-pressed="false" onclick="toggleA('dys',this)" aria-label="Activer la police adaptée à la lecture">Police adaptée</button>
+    <button id="a-interligne" aria-pressed="false" onclick="toggleA('interligne',this)" aria-label="Augmenter l'interligne">Interligne +</button>
+    <button id="a-contraste" aria-pressed="false" onclick="toggleA('contraste',this)" aria-label="Renforcer le contraste">Contraste +</button>
+    <button class="reset-a11y" onclick="resetA11y()" aria-label="Réinitialiser l'affichage">↺ Réinit.</button>
+  </div>
+</header>
+<main id="contenu">
+<!-- ============ ACCUEIL ============ -->
+<section class="view" id="accueil" style="display:block;">
+  <h2 class="titre">Découvre l'IA 🚀</h2>
+  <p class="tagline">Comprendre, manipuler, et apprendre à s'en servir intelligemment.</p>
+  <div class="grille">
+    <div class="mini"><b>🤖 C'est quoi une IA ?</b><p>Un programme qui apprend à partir d'énormément d'exemples, puis produit des réponses tout seul.</p></div>
+    <div class="mini"><b>🧠 C'est quoi un LLM ?</b><p>Un « grand modèle de langage ». Il a lu des milliards de textes et devine la suite la plus probable.</p></div>
+    <div class="mini"><b>⚙️ Comment ça marche ?</b><p>Comme ton clavier qui propose le mot suivant… mais en beaucoup plus fort. Ça improvise.</p></div>
+    <div class="mini"><b>🎨 Ça produit quoi ?</b><p>Du texte, des images, du code, des idées, des résumés, des corrections…</p></div>
+    <div class="mini"><b>⚠️ Les risques ?</b><p>Elle invente parfois, elle ne « sait » pas vraiment, et tes données partent sur des serveurs.</p></div>
+    <div class="mini"><b>🌍 Lesquelles ?</b><p>Des américaines : ChatGPT, Gemini, Claude. Et une <b>française</b> : Le Chat (Mistral).</p></div>
+  </div>
+  <div class="carte howto">
+    <h3>⚙️ Comment ça marche ? (en image)</h3>
+    <p class="objo">L'IA devine le mot suivant… comme le clavier de ton téléphone, mais en bien plus fort.</p>
+    <div class="flow">
+      <div class="fstep"><div class="big">🧑</div><div class="lab">Tu écris :<br><b>« Le frigo fait du… »</b></div></div>
+      <div class="fleche">➜</div>
+      <div class="fstep ia"><div class="big">🤖</div><div class="lab">L'IA cherche le mot le plus <b>probable</b> :</div>
+        <div class="cand"><span class="mot">froid</span><div class="cbar"><i style="width:92%"></i></div></div>
+        <div class="cand"><span class="mot">bruit</span><div class="cbar"><i style="width:28%"></i></div></div>
+        <div class="cand"><span class="mot">café</span><div class="cbar"><i style="width:7%"></i></div></div>
+      </div>
+      <div class="fleche">➜</div>
+      <div class="fstep ok"><div class="big">✅</div><div class="lab">Elle écrit <b>« froid »</b><br>… puis recommence,<br><b>mot après mot</b>.</div></div>
+    </div>
+    <div class="avert">⚠ <b>Le piège :</b> elle choisit le plus <b>probable</b>, pas forcément le <b>vrai</b>. C'est pour ça qu'elle peut se tromper avec aplomb — et c'est tout l'objet du module « Le piège ».</div>
+  </div>
+  <div class="philo">
+    <h3 style="margin-top:0">Pourquoi ce TD ?</h3>
+    <ul>
+      <li>Pour découvrir la <b>puissance</b> de ces outils et apprendre à t'en servir.</li>
+      <li><b>Pas pour tricher</b> : pour t'adapter et évoluer. Demain, l'IA sera partout dans le travail.</li>
+      <li><b>Pour ta suite :</b> bien utiliser l'IA t'aidera à <b>réussir ton BTS</b> et tes études supérieures.</li>
+      <li><b>⚠ Le piège :</b> l'IA peut écrire et dire des choses fausses avec assurance. À toi de garder le contrôle.</li>
+    </ul>
+    <p style="margin:8px 0 0"><b>Comment ça se passe :</b> 4 modules, tu avances à ton rythme, en autonomie. Le prof est là pour t'aider et te guider.</p>
+  </div>
+  <div class="barre-boutons">
+    <button class="cta" onclick="show('sondage')">Commencer le sondage →</button>
+    <button class="cta bleu" onclick="show('filieres')">Aller directement aux modules →</button>
+  </div>
+</section>
+<!-- ============ SONDAGE ============ -->
+<section class="view" id="sondage">
+  <div class="carte">
+    <h2 class="titre">Et vous, vous en êtes où ? 🙋</h2>
+    <p class="objo">On lève la main, le prof compte en cliquant. On regarde le niveau de la classe.</p>
+    <div id="pollzone">
+      <div class="pollrow" data-poll="chatgpt"><span class="nom">Utilise ChatGPT</span><button class="pm moins" onclick="bump('chatgpt',-1)" aria-label="Retirer un vote ChatGPT">−</button><span class="cnt">0</span><button class="pm plus" onclick="bump('chatgpt',1)" aria-label="Ajouter un vote ChatGPT">+</button><div class="bar"><div class="bar-fill"></div></div></div>
+      <div class="pollrow" data-poll="gemini"><span class="nom">Utilise Gemini</span><button class="pm moins" onclick="bump('gemini',-1)" aria-label="Retirer un vote Gemini">−</button><span class="cnt">0</span><button class="pm plus" onclick="bump('gemini',1)" aria-label="Ajouter un vote Gemini">+</button><div class="bar"><div class="bar-fill"></div></div></div>
+      <div class="pollrow" data-poll="claude"><span class="nom">Utilise Claude</span><button class="pm moins" onclick="bump('claude',-1)" aria-label="Retirer un vote Claude">−</button><span class="cnt">0</span><button class="pm plus" onclick="bump('claude',1)" aria-label="Ajouter un vote Claude">+</button><div class="bar"><div class="bar-fill"></div></div></div>
+      <div class="pollrow" data-poll="mistral"><span class="nom">Utilise Le Chat (Mistral)</span><button class="pm moins" onclick="bump('mistral',-1)" aria-label="Retirer un vote Le Chat">−</button><span class="cnt">0</span><button class="pm plus" onclick="bump('mistral',1)" aria-label="Ajouter un vote Le Chat">+</button><div class="bar"><div class="bar-fill"></div></div></div>
+      <div class="pollrow" data-poll="autre"><span class="nom">Une autre IA</span><button class="pm moins" onclick="bump('autre',-1)" aria-label="Retirer un vote autre IA">−</button><span class="cnt">0</span><button class="pm plus" onclick="bump('autre',1)" aria-label="Ajouter un vote autre IA">+</button><div class="bar"><div class="bar-fill"></div></div></div>
+      <div class="pollrow" data-poll="abo"><span class="nom">A un abonnement payant</span><button class="pm moins" onclick="bump('abo',-1)" aria-label="Retirer un vote abonnement">−</button><span class="cnt">0</span><button class="pm plus" onclick="bump('abo',1)" aria-label="Ajouter un vote abonnement">+</button><div class="bar"><div class="bar-fill"></div></div></div>
+      <div class="pollrow" data-poll="images"><span class="nom">Fait déjà des images</span><button class="pm moins" onclick="bump('images',-1)" aria-label="Retirer un vote images">−</button><span class="cnt">0</span><button class="pm plus" onclick="bump('images',1)" aria-label="Ajouter un vote images">+</button><div class="bar"><div class="bar-fill"></div></div></div>
+    </div>
+    <div class="barre-boutons">
+      <button class="cta bleu" onclick="resetPoll()">↺ Remettre à zéro</button>
+      <button class="cta" onclick="show('filieres')">Continuer →</button>
+    </div>
+  </div>
+</section>
+<!-- ============ FILIÈRES ============ -->
+<section class="view" id="filieres">
+  <h2 class="titre">Choisis ta filière</h2>
+  <p class="tagline">On découvre les mêmes outils, avec des exemples de ton métier.</p>
+  <div class="choix">
+    <div class="gros" tabindex="0" role="button" onclick="choisir('sec')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();choisir('sec');}"><div class="ico">🛡</div><div class="t">Métiers de la Sécurité</div><div class="d">Terminale Bac Pro · concours</div></div>
+    <div class="gros" tabindex="0" role="button" onclick="choisir('ene')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();choisir('ene');}"><div class="ico">❄</div><div class="t">MFER – Froid & énergétique</div><div class="d">Terminale Bac Pro · BTS FED</div></div>
+  </div>
+</section>
+<!-- ============ INDEX MODULES SÉCURITÉ ============ -->
+<section class="view" id="modules-sec">
+  <span class="fbadge">🛡 Métiers de la Sécurité</span>
+  <h2 class="titre">Tes 4 modules</h2>
+  <p class="tagline">Un module par séance, à ton rythme. Clique sur un module pour l'ouvrir.</p>
+  <div class="modcards">
+    <div class="modcard" id="card-sec1" tabindex="0" role="button" onclick="show('sec1')" onkeydown="navKey(event,'sec1')"><div class="n">Module 1</div><div class="t">La grande découverte</div><div class="d">Ça parle, ça dessine, ça fabrique.</div><span class="duree">≈ 1h30</span></div>
+    <div class="modcard" id="card-sec2" tabindex="0" role="button" onclick="show('sec2')" onkeydown="navKey(event,'sec2')"><div class="n">Module 2</div><div class="t">L'IA bosse pour toi</div><div class="d">Rapport, PowerPoint, oral.</div><span class="duree">≈ 1h30</span></div>
+    <div class="modcard" id="card-sec3" tabindex="0" role="button" onclick="show('sec3')" onkeydown="navKey(event,'sec3')"><div class="n">Module 3</div><div class="t">Le piège</div><div class="d">Quand l'IA se plante.</div><span class="duree">≈ 1h30</span></div>
+    <div class="modcard" id="card-sec4" tabindex="0" role="button" onclick="show('sec4')" onkeydown="navKey(event,'sec4')"><div class="n">Module 4</div><div class="t">Ta boîte à outils</div><div class="d">Tes prompts pour le concours.</div><span class="duree">≈ 1h30</span></div>
+  </div>
+</section>
+<!-- ============ INDEX MODULES ÉNERGÉTIQUE ============ -->
+<section class="view" id="modules-ene">
+  <span class="fbadge">❄ MFER – Froid & énergétique</span>
+  <h2 class="titre">Tes 4 modules</h2>
+  <p class="tagline">Un module par séance, à ton rythme. Clique sur un module pour l'ouvrir.</p>
+  <div class="modcards">
+    <div class="modcard" id="card-ene1" tabindex="0" role="button" onclick="show('ene1')" onkeydown="navKey(event,'ene1')"><div class="n">Module 1</div><div class="t">La grande découverte</div><div class="d">Ça parle, ça dessine, ça fabrique.</div><span class="duree">≈ 1h30</span></div>
+    <div class="modcard" id="card-ene2" tabindex="0" role="button" onclick="show('ene2')" onkeydown="navKey(event,'ene2')"><div class="n">Module 2</div><div class="t">L'IA bosse pour toi</div><div class="d">Rapport, PowerPoint, oral.</div><span class="duree">≈ 1h30</span></div>
+    <div class="modcard" id="card-ene3" tabindex="0" role="button" onclick="show('ene3')" onkeydown="navKey(event,'ene3')"><div class="n">Module 3</div><div class="t">Le piège</div><div class="d">Quand l'IA se plante.</div><span class="duree">≈ 1h30</span></div>
+    <div class="modcard" id="card-ene4" tabindex="0" role="button" onclick="show('ene4')" onkeydown="navKey(event,'ene4')"><div class="n">Module 4</div><div class="t">Ta boîte à outils</div><div class="d">Tes prompts pour le BTS.</div><span class="duree">≈ 1h30</span></div>
+  </div>
+</section>
+<!-- ===================== MODULES SÉCURITÉ ===================== -->
+<section class="view" id="sec1">
+  <span class="fbadge">🛡 Sécurité · Module 1</span>
+  <h2 class="titre">La grande découverte</h2>
+  <div class="carte"><h3><span class="pas">0</span> On se connecte</h3>
+    <div class="avert">👉 <b>Clique sur les boutons officiels.</b> Ne tape jamais le nom dans Google : risque de faux site.</div>
+    <div class="liens"><a class="lien" href="https://chatgpt.com" target="_blank" rel="noopener">🔗 ChatGPT<small>chatgpt.com</small></a><a class="lien" href="https://gemini.google.com" target="_blank" rel="noopener">🔗 Gemini<small>gemini.google.com</small></a><a class="lien" href="https://claude.ai" target="_blank" rel="noopener">🔗 Claude<small>claude.ai</small></a></div>
+    <ul><li><span class="cle">Gemini</span> : compte Google de l'établissement.</li><li><span class="cle">ChatGPT</span> : utilisable sans compte aujourd'hui.</li><li><span class="cle">Claude</span> : crée ton compte (numéro de portable pour le code, 18 ans min).</li><li><span class="att">Règle d'or :</span> jamais de données perso.</li></ul>
+  </div>
+  <div class="carte"><h3><span class="pas">1</span> Ça parle <span class="etiq">les 3 IA</span></h3>
+    <p class="objo">Même question dans les trois, compare.</p>
+    <div class="prompt"><span class="txt">Explique-moi à quoi sert un SSI (système de sécurité incendie) comme à un enfant de 6 ans, avec une comparaison rigolote.</span><button class="btn-copie" data-copie="Explique-moi à quoi sert un SSI (système de sécurité incendie) comme à un enfant de 6 ans, avec une comparaison rigolote.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt"><b>Concours :</b> Pose-moi 3 questions de culture générale type concours de gardien de la paix, puis corrige mes réponses.</span><button class="btn-copie" data-copie="Pose-moi 3 questions de culture générale type concours de gardien de la paix, puis corrige mes réponses.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> Ça dessine 🎨 <span class="etiq">Gemini</span></h3>
+    <div class="prompt"><span class="txt">Un agent de sécurité en super-héros qui veille sur une gare, style cartoon coloré.</span><button class="btn-copie" data-copie="Un agent de sécurité en super-héros qui veille sur une gare, style cartoon coloré.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt">Un poste de vidéosurveillance du futur, photo réaliste, ambiance nuit.</span><button class="btn-copie" data-copie="Un poste de vidéosurveillance du futur, photo réaliste, ambiance nuit.">Copier 📋</button></div>
+    <p style="margin-top:10px"><span class="att">⚠</span> Jamais la vraie tête de quelqu'un.</p>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> Ça fabrique <span class="etiq">À toi, dans Claude</span></h3>
+    <p class="objo">Colle le prompt dans Claude : un vrai outil apparaît et marche.</p>
+    <div class="prompt"><span class="txt"><b>Le jeu :</b> Fais-moi un petit jeu de pierre-feuille-ciseaux qui marche dans le navigateur.</span><button class="btn-copie" data-copie="Fais-moi un petit jeu de pierre-feuille-ciseaux qui marche dans le navigateur.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt"><b>Ton concours :</b> Fais une page web qui me pose 5 questions de QCM sur les gestes de premiers secours, avec le score à la fin.</span><button class="btn-copie" data-copie="Fais une page web qui me pose 5 questions de QCM sur les gestes de premiers secours, avec le score à la fin.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">+</span> C'est quoi un fichier HTML ?</h3>
+    <ul><li>Une page web = une <b>recette</b> écrite en HTML. L'IA l'a écrite.</li><li>Copie le code → colle dans le Bloc-notes → enregistre en <b>mon-qcm.html</b> → double-clic → ça s'ouvre !</li></ul>
+    <div class="fait-ligne" onclick="toggleFait(this)"><span class="coche">✓</span><span class="lab">Module 1 terminé</span></div>
+  </div>
+  <div class="modnav"><button class="retour" onclick="show('modules-sec')">← Modules</button><button class="suite" onclick="show('sec2')">Module suivant →</button></div>
+</section>
+<section class="view" id="sec2">
+  <span class="fbadge">🛡 Sécurité · Module 2</span>
+  <h2 class="titre">L'IA bosse pour toi 💼</h2>
+  <div class="carte"><h3><span class="pas">1</span> Structurer mon rapport</h3>
+    <div class="prompt"><span class="txt">Je dois écrire un rapport de stage effectué dans une société de sécurité. Pose-moi 5 questions simples pour m'aider à construire le plan.</span><button class="btn-copie" data-copie="Je dois écrire un rapport de stage effectué dans une société de sécurité. Pose-moi 5 questions simples pour m'aider à construire le plan.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> Rédiger et améliorer</h3>
+    <div class="prompt"><span class="txt">Réécris ce passage en français correct et professionnel, sans rien inventer : <b>[colle ton texte]</b></span><button class="btn-copie" data-copie="Réécris ce passage en français correct et professionnel, sans rien inventer : ">Copier 📋</button></div>
+    <div class="avert"><b>⚠ Règle :</b> ton rapport raconte CE QUE TU AS VÉCU. L'IA reformule, elle n'invente pas ton stage.</div>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> Mon PowerPoint <span class="etiq">+ Gemini pour les images</span></h3>
+    <div class="prompt"><span class="txt">Propose-moi un plan de 6 diapositives pour présenter mon stage à l'oral, avec un titre par diapo.</span><button class="btn-copie" data-copie="Propose-moi un plan de 6 diapositives pour présenter mon stage à l'oral, avec un titre par diapo.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">4</span> Préparer l'oral</h3>
+    <div class="prompt"><span class="txt">Joue le rôle du jury : pose-moi 3 questions sur mon stage en sécurité, attends mes réponses, puis donne-moi un conseil.</span><button class="btn-copie" data-copie="Joue le rôle du jury : pose-moi 3 questions sur mon stage en sécurité, attends mes réponses, puis donne-moi un conseil.">Copier 📋</button></div>
+    <div class="fait-ligne" onclick="toggleFait(this)"><span class="coche">✓</span><span class="lab">Module 2 terminé</span></div>
+  </div>
+  <div class="modnav"><button class="retour" onclick="show('modules-sec')">← Modules</button><button class="suite" onclick="show('sec3')">Module suivant →</button></div>
+</section>
+<section class="view" id="sec3">
+  <span class="fbadge">🛡 Sécurité · Module 3</span>
+  <h2 class="titre">Le piège 🕵</h2>
+  <div class="carte"><h3><span class="pas">1</span> Le fait « sûr de lui »</h3>
+    <p class="objo">Une réponse confiante n'est pas une réponse juste. Vérifie toujours.</p>
+    <div class="prompt"><span class="txt">Cite-moi l'article exact du Code de la sécurité intérieure qui encadre la vidéoprotection sur la voie publique.</span><button class="btn-copie" data-copie="Cite-moi l'article exact du Code de la sécurité intérieure qui encadre la vidéoprotection sur la voie publique.">Copier 📋</button></div>
+    <div class="reponse">🔎 <b>Vérifie</b> avec le prof / le texte officiel. L'IA donne un numéro précis… parfois faux. Un agent ne cite jamais une loi sans la vérifier.</div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> Ça invente</h3>
+    <div class="prompt"><span class="txt">Parle-moi en détail de la « loi Martin-Lévêque de 2003 sur la sécurité privée ».</span><button class="btn-copie" data-copie="Parle-moi en détail de la « loi Martin-Lévêque de 2003 sur la sécurité privée ».">Copier 📋</button></div>
+    <div class="reponse">🎭 Cette loi <b>n'existe pas</b>. Regarde si l'IA invente quand même. (On appelle ça une « hallucination ».)</div>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> Tes données</h3>
+    <ul><li>Jamais de nom, d'info sur une personne, un site, une consigne.</li><li>En cas de doute → anonymise (« le site X »).</li></ul>
+    <div class="avert">🇫🇷 <b>Bon à savoir :</b> il existe une IA française, <b>Le Chat (Mistral)</b>, hébergée en Europe et soumise au RGPD européen. Avec elle, tes données ne partent pas aux États-Unis.</div>
+  </div>
+  <div class="carte"><h3><span class="pas">4</span> Tricher ou apprendre ?</h3>
+    <ul><li><span class="att">Recopier sans comprendre</span> = au concours, tu seras seul(e).</li><li><span class="cle">Comprendre AVEC l'IA</span> = tu deviens plus fort.</li></ul>
+    <div class="prompt"><span class="txt"><b>La bonne façon :</b> Je n'ai pas compris la différence entre sûreté et sécurité. Explique avec un exemple, puis pose-moi une question pour vérifier.</span><button class="btn-copie" data-copie="Je n'ai pas compris la différence entre sûreté et sécurité. Explique avec un exemple, puis pose-moi une question pour vérifier.">Copier 📋</button></div>
+    <div class="fait-ligne" onclick="toggleFait(this)"><span class="coche">✓</span><span class="lab">Module 3 terminé</span></div>
+  </div>
+  <div class="modnav"><button class="retour" onclick="show('modules-sec')">← Modules</button><button class="suite" onclick="show('sec4')">Module suivant →</button></div>
+</section>
+<section class="view" id="sec4">
+  <span class="fbadge">🛡 Sécurité · Module 4</span>
+  <h2 class="titre">Ta boîte à outils 🎒</h2>
+  <div class="carte"><h3><span class="pas">1</span> Réviser</h3>
+    <div class="prompt"><span class="txt">Explique-moi <b>[la notion]</b> simplement, avec un exemple, puis pose-moi 2 questions pour vérifier.</span><button class="btn-copie" data-copie="Explique-moi [la notion] simplement, avec un exemple, puis pose-moi 2 questions pour vérifier.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> S'entraîner au concours</h3>
+    <div class="prompt"><span class="txt">Crée-moi un QCM de 10 questions de culture générale type concours de <b>[gardien de la paix]</b>, avec la correction.</span><button class="btn-copie" data-copie="Crée-moi un QCM de 10 questions de culture générale type concours de [gardien de la paix], avec la correction.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> Comprendre un texte</h3>
+    <div class="prompt"><span class="txt">Explique-moi ce texte en mots simples, comme à un débutant : <b>[colle le texte]</b></span><button class="btn-copie" data-copie="Explique-moi ce texte en mots simples, comme à un débutant : ">Copier 📋</button></div>
+  </div>
+  <div class="carte fiche"><h3><span class="pas">4</span> Ma fiche perso</h3>
+    <p class="objo">Écris TES prompts, puis imprime.</p>
+    <div class="champ"><label for="s-rev">🧠 Réviser</label><textarea id="s-rev">Explique-moi ____ simplement, avec un exemple, puis pose-moi 2 questions.</textarea></div>
+    <div class="champ"><label for="s-ent">💪 M'entraîner (concours)</label><textarea id="s-ent">Crée-moi un QCM de 10 questions sur ____, avec la correction.</textarea></div>
+    <div class="champ"><label for="s-comp">🔎 Comprendre</label><textarea id="s-comp">Explique-moi ____ en mots simples, comme à un débutant.</textarea></div>
+    <button class="btn-print" onclick="window.print()">🖨 Imprimer ma fiche</button>
+    <p class="no-print" style="margin-top:14px;color:var(--bleu);font-weight:bold;">🎓 L'IA est ton assistant, pas ton cerveau. Maintenant tu sais t'en servir.</p>
+  </div>
+  <div class="modnav"><button class="retour" onclick="show('modules-sec')">← Modules</button><button class="suite" onclick="show('accueil')">🏁 Terminé</button></div>
+</section>
+<!-- ===================== MODULES ÉNERGÉTIQUE ===================== -->
+<section class="view" id="ene1">
+  <span class="fbadge">❄ Énergétique · Module 1</span>
+  <h2 class="titre">La grande découverte</h2>
+  <div class="carte"><h3><span class="pas">0</span> On se connecte</h3>
+    <div class="avert">👉 <b>Clique sur les boutons officiels.</b> Ne tape jamais le nom dans Google : risque de faux site.</div>
+    <div class="liens"><a class="lien" href="https://chatgpt.com" target="_blank" rel="noopener">🔗 ChatGPT<small>chatgpt.com</small></a><a class="lien" href="https://gemini.google.com" target="_blank" rel="noopener">🔗 Gemini<small>gemini.google.com</small></a><a class="lien" href="https://claude.ai" target="_blank" rel="noopener">🔗 Claude<small>claude.ai</small></a></div>
+    <ul><li><span class="cle">Gemini</span> : compte Google de l'établissement.</li><li><span class="cle">ChatGPT</span> : utilisable sans compte aujourd'hui.</li><li><span class="cle">Claude</span> : crée ton compte (numéro de portable pour le code, 18 ans min).</li><li><span class="att">Règle d'or :</span> jamais de données perso.</li></ul>
+  </div>
+  <div class="carte"><h3><span class="pas">1</span> Ça parle <span class="etiq">les 3 IA</span></h3>
+    <p class="objo">Même question dans les trois, compare.</p>
+    <div class="prompt"><span class="txt">Explique-moi le cycle frigorifique comme à un enfant de 6 ans, avec une comparaison rigolote.</span><button class="btn-copie" data-copie="Explique-moi le cycle frigorifique comme à un enfant de 6 ans, avec une comparaison rigolote.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt"><b>Bonus :</b> Pose-moi 3 questions pour réviser la surchauffe, puis corrige mes réponses.</span><button class="btn-copie" data-copie="Pose-moi 3 questions pour réviser la surchauffe, puis corrige mes réponses.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> Ça dessine 🎨 <span class="etiq">Gemini</span></h3>
+    <div class="prompt"><span class="txt">Un climatiseur-dragon qui crache de la glace, style cartoon coloré.</span><button class="btn-copie" data-copie="Un climatiseur-dragon qui crache de la glace, style cartoon coloré.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt">Mon futur atelier de frigoriste en version maquette LEGO.</span><button class="btn-copie" data-copie="Mon futur atelier de frigoriste en version maquette LEGO.">Copier 📋</button></div>
+    <p style="margin-top:10px"><span class="att">⚠</span> Jamais la vraie tête de quelqu'un.</p>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> Ça fabrique <span class="etiq">À toi, dans Claude</span></h3>
+    <p class="objo">Colle le prompt dans Claude : un vrai programme apparaît et marche.</p>
+    <div class="prompt"><span class="txt"><b>Le jeu :</b> Fais-moi un petit jeu de pierre-feuille-ciseaux qui marche dans le navigateur.</span><button class="btn-copie" data-copie="Fais-moi un petit jeu de pierre-feuille-ciseaux qui marche dans le navigateur.">Copier 📋</button></div>
+    <div class="prompt"><span class="txt"><b>Ton métier :</b> Fais une page web qui convertit une pression relative (en bar) en pression absolue.</span><button class="btn-copie" data-copie="Fais une page web qui convertit une pression relative (en bar) en pression absolue.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">+</span> C'est quoi un fichier HTML ?</h3>
+    <ul><li>Une page web = une <b>recette</b> écrite en HTML. L'IA l'a écrite.</li><li>Copie le code → colle dans le Bloc-notes → enregistre en <b>mapage.html</b> → double-clic → ça s'ouvre !</li></ul>
+    <div class="fait-ligne" onclick="toggleFait(this)"><span class="coche">✓</span><span class="lab">Module 1 terminé</span></div>
+  </div>
+  <div class="modnav"><button class="retour" onclick="show('modules-ene')">← Modules</button><button class="suite" onclick="show('ene2')">Module suivant →</button></div>
+</section>
+<section class="view" id="ene2">
+  <span class="fbadge">❄ Énergétique · Module 2</span>
+  <h2 class="titre">L'IA bosse pour toi 💼</h2>
+  <div class="carte"><h3><span class="pas">1</span> Structurer mon rapport</h3>
+    <div class="prompt"><span class="txt">Je dois écrire un rapport de stage de frigoriste. Pose-moi 5 questions simples pour m'aider à construire le plan.</span><button class="btn-copie" data-copie="Je dois écrire un rapport de stage de frigoriste. Pose-moi 5 questions simples pour m'aider à construire le plan.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> Rédiger et améliorer</h3>
+    <div class="prompt"><span class="txt">Réécris ce passage en français correct et professionnel, sans rien inventer : <b>[colle ton texte]</b></span><button class="btn-copie" data-copie="Réécris ce passage en français correct et professionnel, sans rien inventer : ">Copier 📋</button></div>
+    <div class="avert"><b>⚠ Règle :</b> ton rapport raconte CE QUE TU AS VÉCU. L'IA reformule, elle n'invente pas ton stage.</div>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> Mon PowerPoint <span class="etiq">+ Gemini pour les images</span></h3>
+    <div class="prompt"><span class="txt">Propose-moi un plan de 6 diapositives pour présenter mon stage à l'oral, avec un titre par diapo.</span><button class="btn-copie" data-copie="Propose-moi un plan de 6 diapositives pour présenter mon stage à l'oral, avec un titre par diapo.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">4</span> Préparer l'oral</h3>
+    <div class="prompt"><span class="txt">Joue le rôle du jury : pose-moi 3 questions sur mon stage de frigoriste, attends mes réponses, puis donne-moi un conseil.</span><button class="btn-copie" data-copie="Joue le rôle du jury : pose-moi 3 questions sur mon stage de frigoriste, attends mes réponses, puis donne-moi un conseil.">Copier 📋</button></div>
+    <div class="fait-ligne" onclick="toggleFait(this)"><span class="coche">✓</span><span class="lab">Module 2 terminé</span></div>
+  </div>
+  <div class="modnav"><button class="retour" onclick="show('modules-ene')">← Modules</button><button class="suite" onclick="show('ene3')">Module suivant →</button></div>
+</section>
+<section class="view" id="ene3">
+  <span class="fbadge">❄ Énergétique · Module 3</span>
+  <h2 class="titre">Le piège 🕵</h2>
+  <div class="carte"><h3><span class="pas">1</span> Le piège du calcul</h3>
+    <div class="prompt"><span class="txt">Convertis 4,5 bar (pression relative) en pression absolue.</span><button class="btn-copie" data-copie="Convertis 4,5 bar (pression relative) en pression absolue.">Copier 📋</button></div>
+    <div class="reponse">✅ <b>≈ 5,5 bar</b> (pression absolue = relative + pression atmosphérique ≈ 1 bar). Si l'IA oublie le « +1 », tu l'as coincée !</div>
+    <div class="prompt" style="margin-top:12px"><span class="txt">Calcule le COP d'une PAC qui fournit 9 kW de chaleur en absorbant 3 kW électriques.</span><button class="btn-copie" data-copie="Calcule le COP d'une PAC qui fournit 9 kW de chaleur en absorbant 3 kW électriques.">Copier 📋</button></div>
+    <div class="reponse">✅ <b>COP = 9 / 3 = 3.</b></div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> Ça invente</h3>
+    <div class="prompt"><span class="txt">Parle-moi en détail du « règlement frigorifique Dupont de 1987 ».</span><button class="btn-copie" data-copie="Parle-moi en détail du « règlement frigorifique Dupont de 1987 ».">Copier 📋</button></div>
+    <div class="reponse">🎭 Ce règlement <b>n'existe pas</b>. Regarde si l'IA invente quand même. (On appelle ça une « hallucination ».)</div>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> Tes données</h3>
+    <ul><li>Jamais de nom, d'adresse, de document confidentiel d'entreprise.</li><li>En cas de doute → anonymise (« M. X »).</li></ul>
+    <div class="avert">🇫🇷 <b>Bon à savoir :</b> il existe une IA française, <b>Le Chat (Mistral)</b>, hébergée en Europe et soumise au RGPD européen. Avec elle, tes données ne partent pas aux États-Unis.</div>
+  </div>
+  <div class="carte"><h3><span class="pas">4</span> Tricher ou apprendre ?</h3>
+    <ul><li><span class="att">Recopier sans comprendre</span> = zéro progrès, et le prof le repère.</li><li><span class="cle">Comprendre AVEC l'IA</span> = tu deviens plus fort.</li></ul>
+    <div class="prompt"><span class="txt"><b>La bonne façon :</b> Je n'ai pas compris la surchauffe. Explique avec un exemple concret, puis pose-moi une question pour vérifier.</span><button class="btn-copie" data-copie="Je n'ai pas compris la surchauffe. Explique avec un exemple concret, puis pose-moi une question pour vérifier.">Copier 📋</button></div>
+    <div class="fait-ligne" onclick="toggleFait(this)"><span class="coche">✓</span><span class="lab">Module 3 terminé</span></div>
+  </div>
+  <div class="modnav"><button class="retour" onclick="show('modules-ene')">← Modules</button><button class="suite" onclick="show('ene4')">Module suivant →</button></div>
+</section>
+<section class="view" id="ene4">
+  <span class="fbadge">❄ Énergétique · Module 4</span>
+  <h2 class="titre">Ta boîte à outils 🎒</h2>
+  <div class="carte"><h3><span class="pas">1</span> Réviser</h3>
+    <div class="prompt"><span class="txt">Explique-moi <b>[la notion]</b> simplement, avec un exemple, puis pose-moi 2 questions pour vérifier.</span><button class="btn-copie" data-copie="Explique-moi [la notion] simplement, avec un exemple, puis pose-moi 2 questions pour vérifier.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">2</span> S'entraîner</h3>
+    <div class="prompt"><span class="txt">Crée-moi un QCM de 10 questions sur <b>[le cycle frigorifique]</b>, avec la correction.</span><button class="btn-copie" data-copie="Crée-moi un QCM de 10 questions sur [le cycle frigorifique], avec la correction.">Copier 📋</button></div>
+  </div>
+  <div class="carte"><h3><span class="pas">3</span> Comprendre une notice</h3>
+    <div class="prompt"><span class="txt">Explique-moi ce passage de notice technique en mots simples, comme à un débutant : <b>[colle le texte]</b></span><button class="btn-copie" data-copie="Explique-moi ce passage de notice technique en mots simples, comme à un débutant : ">Copier 📋</button></div>
+  </div>
+  <div class="carte fiche"><h3><span class="pas">4</span> Ma fiche perso</h3>
+    <p class="objo">Écris TES prompts, puis imprime.</p>
+    <div class="champ"><label for="e-rev">🧠 Réviser</label><textarea id="e-rev">Explique-moi ____ simplement, avec un exemple, puis pose-moi 2 questions.</textarea></div>
+    <div class="champ"><label for="e-ent">💪 M'entraîner</label><textarea id="e-ent">Crée-moi un QCM de 10 questions sur ____, avec la correction.</textarea></div>
+    <div class="champ"><label for="e-comp">🔎 Comprendre</label><textarea id="e-comp">Explique-moi ____ en mots simples, comme à un débutant.</textarea></div>
+    <button class="btn-print" onclick="window.print()">🖨 Imprimer ma fiche</button>
+    <p class="no-print" style="margin-top:14px;color:var(--bleu);font-weight:bold;">🎓 L'IA est ton assistant, pas ton cerveau. Maintenant tu sais t'en servir.</p>
+  </div>
+  <div class="modnav"><button class="retour" onclick="show('modules-ene')">← Modules</button><button class="suite" onclick="show('accueil')">🏁 Terminé</button></div>
+</section>
+</main>
+<footer>Ressource pédagogique <span class="etab">inerWeb Édu</span> · F. Henninot — LP Privé Jacques Raynaud · Parcours Avenir · Réutilisable (GitHub Pages)</footer>
+<div class="toast" id="toast" role="status" aria-live="polite">Copié ✓</div>
+<script>
+  // ---- Router ----
+  const titres={accueil:"Programme de découverte de l'IA",sondage:"Le sondage",filieres:"Choix de la filière","modules-sec":"🛡 Sécurité — modules","modules-ene":"❄ Énergétique — modules",sec1:"🛡 Module 1",sec2:"🛡 Module 2",sec3:"🛡 Module 3",sec4:"🛡 Module 4",ene1:"❄ Module 1",ene2:"❄ Module 2",ene3:"❄ Module 3",ene4:"❄ Module 4"};
+  function show(id){
+    document.querySelectorAll('.view').forEach(v=>v.style.display='none');
+    const el=document.getElementById(id); if(el){el.style.display='block';}
+    document.getElementById('bread').textContent=titres[id]||'';
+    if(/^(sec|ene)[1-4]$/.test(id)){const c=document.getElementById('card-'+id);if(c)c.classList.add('vu');}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function choisir(f){show(f==='sec'?'modules-sec':'modules-ene');}
+  function navKey(e,id){if(e.key==='Enter'||e.key===' '){e.preventDefault();show(id);}}
+  // ---- Sondage ----
+  const poll={chatgpt:0,gemini:0,claude:0,mistral:0,autre:0,abo:0,images:0};
+  function bump(k,d){poll[k]=Math.max(0,poll[k]+d);renderPoll();}
+  function resetPoll(){Object.keys(poll).forEach(k=>poll[k]=0);renderPoll();}
+  function renderPoll(){
+    const max=Math.max(1,...Object.values(poll));
+    document.querySelectorAll('[data-poll]').forEach(r=>{
+      const k=r.getAttribute('data-poll');
+      r.querySelector('.cnt').textContent=poll[k];
+      r.querySelector('.bar-fill').style.width=(poll[k]/max*100)+'%';
+    });
+  }
+  // ---- Copier ----
+  function copier(t,b){const ok=()=>feedback(b);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok).catch(()=>secours(t,ok));}else{secours(t,ok);}}
+  function secours(t,ok){const z=document.createElement('textarea');z.value=t;z.style.position='fixed';z.style.opacity='0';document.body.appendChild(z);z.focus();z.select();try{document.execCommand('copy');ok();}catch(e){}document.body.removeChild(z);}
+  function feedback(b){const o=b.textContent;b.textContent='Copié ✓';b.classList.add('fait');const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>{b.textContent=o;b.classList.remove('fait');},1300);setTimeout(()=>t.classList.remove('show'),1300);}
+  document.querySelectorAll('.btn-copie').forEach(b=>b.addEventListener('click',()=>copier(b.getAttribute('data-copie'),b)));
+  function toggleFait(el){el.classList.toggle('coche-on');}
+  // ---- Accessibilité (taille, police DYS, interligne, contraste) ----
+  const A11Y_KEY='inerweb_ia_a11y';
+  const ZOOMS=[0.9,1,1.1,1.25,1.4]; let fsIdx=1;
+  const TOGGLES=['dys','interligne','contraste'];
+  function saveA11y(){try{localStorage.setItem(A11Y_KEY,JSON.stringify({fsIdx:fsIdx,dys:document.body.classList.contains('dys'),interligne:document.body.classList.contains('interligne'),contraste:document.body.classList.contains('contraste')}));}catch(e){}}
+  function applyZoom(){const m=document.getElementById('contenu');if(m)m.style.zoom=ZOOMS[fsIdx];}
+  function fontStep(d){fsIdx=Math.min(ZOOMS.length-1,Math.max(0,fsIdx+d));applyZoom();saveA11y();}
+  function toggleA(name,btn){const on=document.body.classList.toggle(name);if(btn)btn.setAttribute('aria-pressed',on?'true':'false');saveA11y();}
+  function syncButtons(){TOGGLES.forEach(n=>{const b=document.getElementById('a-'+n);if(b)b.setAttribute('aria-pressed',document.body.classList.contains(n)?'true':'false');});}
+  function resetA11y(){fsIdx=1;applyZoom();TOGGLES.forEach(n=>document.body.classList.remove(n));syncButtons();saveA11y();}
+  (function loadA11y(){try{const s=JSON.parse(localStorage.getItem(A11Y_KEY));if(s){if(typeof s.fsIdx==='number')fsIdx=Math.min(ZOOMS.length-1,Math.max(0,s.fsIdx));TOGGLES.forEach(n=>{if(s[n])document.body.classList.add(n);});}}catch(e){}applyZoom();syncButtons();})();
+</script>
+</body>
+</html>
