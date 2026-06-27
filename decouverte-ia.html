@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -593,5 +593,7 @@
   function resetA11y(){fsIdx=1;applyZoom();TOGGLES.forEach(n=>document.body.classList.remove(n));syncButtons();saveA11y();}
   (function loadA11y(){try{const s=JSON.parse(localStorage.getItem(A11Y_KEY));if(s){if(typeof s.fsIdx==='number')fsIdx=Math.min(ZOOMS.length-1,Math.max(0,s.fsIdx));TOGGLES.forEach(n=>{if(s[n])document.body.classList.add(n);});}}catch(e){}applyZoom();syncButtons();})();
 </script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "86c8808b88f3489c8f37af96810d5f1e"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
